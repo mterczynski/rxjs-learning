@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { flatteningArraysExample } from './rxjs-examples';
-import { Observable } from 'rxjs';
-import { mergeMapPatientPrescriptions } from './rxjs-examples/merge-map-patient-prescriptions';
+import { switchMapExample } from './rxjs-examples/switch-map-example';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +8,9 @@ import { mergeMapPatientPrescriptions } from './rxjs-examples/merge-map-patient-
 })
 export class AppComponent {
   constructor() {
-    mergeMapPatientPrescriptions()
+    // mergeMapPatientPrescriptions()
+    // concatMapExample();
+    switchMapExample();
+    // flatteningArraysExample();
   }
 }

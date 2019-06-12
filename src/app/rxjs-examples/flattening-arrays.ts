@@ -1,7 +1,7 @@
 import { of } from "rxjs";
 import { switchMap, mergeMap, exhaustMap, concatMap } from "rxjs/operators";
 
-const source = of([1,2], [3, 4]);
+const source = of([1, 2], [3, 4]);
 
 export function flatteningArraysExample() {
   console.log('=== SWITCH MAP ===')
