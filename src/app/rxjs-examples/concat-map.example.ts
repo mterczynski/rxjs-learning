@@ -6,38 +6,17 @@ interface Patient {
   name: string;
 }
 
-
-let counter = 0;
-
 function getPatientPrescriptions(patientId: number): Observable<any> {
-  if (counter === 0) {
-    counter++;
+  return new Observable(observer => {
+    setTimeout(() => {
+      observer.next(1);
+    }, 3000);
 
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next(1);
-      }, 3000);
-
-      setTimeout(() => {
-        observer.next(2);
-      }, 4000);
-
-      setTimeout(() => {
-        observer.complete();
-      }, 4000);
-    });
-  } else {
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next(3);
-      }, 1000);
-
-      setTimeout(() => {
-        observer.next(4);
-      }, 4000);
-    });
-  }
-
+    setTimeout(() => {
+      observer.next(2);
+      observer.complete();
+    }, 4000);
+  });
 }
 
 export function concatMapExample() {
@@ -54,6 +33,8 @@ export function concatMapExample() {
         id: 2,
         name: 'Darlene',
       });
+
+      observer.complete();
     }, 1000);
   });
 
@@ -63,5 +44,9 @@ export function concatMapExample() {
     .pipe(
       concatMap(patient => getPatientPrescriptions(patient.id)),
     )
-    .subscribe(val => console.log(`emitted `, val, ` after ${Date.now() - startDate}ms`), () => {} , () => console.log('completed'));
+    .subscribe(
+      val => console.log(`emitted `, val, ` after ${Date.now() - startDate}ms`),
+      () => {} ,
+      () => console.log('=== Concat map example completed ==='),
+    );
 }

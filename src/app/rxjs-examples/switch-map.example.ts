@@ -19,7 +19,7 @@ function getPatientPrescriptions(patientId: number): Observable<any> {
           }
         ]
       )
-    )
+    );
 }
 
 export function switchMapExample() {
@@ -28,15 +28,17 @@ export function switchMapExample() {
       observer.next({
         id: 1,
         name: 'Michael',
-      })
-    }, 0)
+      });
+    }, 0);
 
     setTimeout(() => {
       observer.next({
         id: 2,
         name: 'Darlene',
-      })
-    }, 1000)
+      });
+
+      observer.complete();
+    }, 1000);
   });
 
   const startDate = Date.now();
@@ -45,5 +47,9 @@ export function switchMapExample() {
     .pipe(
       switchMap(patient => getPatientPrescriptions(patient.id)),
     )
-    .subscribe(val => console.log(`emitted `, val, ` after ${Date.now() - startDate}ms`), () => {} , () => console.log('completed'))
+    .subscribe(
+      val => console.log(`emitted `, val, ` after ${Date.now() - startDate}ms`),
+      () => {},
+      () => console.log('=== Switch map example completed ===')
+    );
 }

@@ -1,13 +1,9 @@
 import { Observable, timer } from 'rxjs';
-import { mapTo, mergeMap, switchMap } from 'rxjs/operators';
+import { mapTo, mergeMap } from 'rxjs/operators';
 
 interface Patient {
   id: number;
   name: string;
-}
-
-interface Prescription {
-  id: number;
 }
 
 function getPatientPrescriptions(patientId: number): Observable<any> {
@@ -23,31 +19,36 @@ function getPatientPrescriptions(patientId: number): Observable<any> {
           }
         ]
       )
-    )
+    );
 }
 
-export function mergeMapPatientPrescriptions() {
+export function mergeMapExample() {
   const patientObservable = new Observable<Patient>(observer => {
     setTimeout(() => {
       observer.next({
         id: 1,
         name: 'Michael',
-      })
-    }, 0)
+      });
+    }, 0);
 
     setTimeout(() => {
       observer.next({
         id: 2,
         name: 'Darlene',
-      })
-    }, 1000)
+      });
+      observer.complete();
+    }, 1000);
   });
 
-  let startDate = Date.now();
+  const startDate = Date.now();
 
   patientObservable
     .pipe(
       mergeMap(patient => getPatientPrescriptions(patient.id)),
     )
-    .subscribe(val => console.log(`emitted `, val, ` after ${Date.now() - startDate}ms`), () =>{} , () => console.log('completed'))
+    .subscribe(
+      val => console.log(`emitted `, val, ` after ${Date.now() - startDate}ms`),
+      () => {},
+      () => console.log('=== Merge map example completed ==='),
+    );
 }

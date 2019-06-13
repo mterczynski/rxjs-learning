@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { switchMapExample } from './rxjs-examples/switch-map-example';
+import { concatMapExample, mergeMapExample, switchMapExample, flatteningArraysExample } from './rxjs-examples';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +7,10 @@ import { switchMapExample } from './rxjs-examples/switch-map-example';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor() {
-    // mergeMapPatientPrescriptions()
-    // concatMapExample();
-    switchMapExample();
-    // flatteningArraysExample();
-  }
+  examples = {
+    switchMap: switchMapExample,
+    mergeMap: mergeMapExample,
+    concatMap: concatMapExample,
+    flatteningArrays: flatteningArraysExample,
+  };
 }
