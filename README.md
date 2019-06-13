@@ -12,4 +12,4 @@ You can download Yarn from https://yarnpkg.com/en/docs/install#windows-stable).
 
 ## Running app
 
-Run `ng serve` or `ng s` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` or `ng s` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
