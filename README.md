@@ -2,9 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
 
-## Install dependencies
+## Install Yarn
 
-You will need yarn (you can download yarn from https://yarnpkg.com/en/docs/install#windows-stable)
+You can download Yarn from https://yarnpkg.com/en/docs/install#windows-stable).
+
+## Install dependencies using yarn
 
 `yarn`
 
