@@ -1,25 +1,25 @@
 import { Observable } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { exhaustMap } from 'rxjs/operators';
 
 interface Patient {
   id: number;
   name: string;
 }
 
-function getPatientPrescriptions(patientId: number): Observable<any> {
+function getPatientPrescriptions(): Observable<any> {
   return new Observable(observer => {
     setTimeout(() => {
       observer.next(1);
-    }, 3000);
+    }, 1000);
 
     setTimeout(() => {
       observer.next(2);
       observer.complete();
-    }, 4000);
+    }, 2000);
   });
 }
 
-export function concatMapExample() {
+export function exhaustMapExample() {
   const patientObservable = new Observable<Patient>(observer => {
     observer.next({
       id: 1,
@@ -29,50 +29,57 @@ export function concatMapExample() {
     setTimeout(() => {
       observer.next({
         id: 2,
-        name: 'Darlene',
+        name: 'John',
+      });
+    }, 1000);
+
+    setTimeout(() => {
+      observer.next({
+        id: 3,
+        name: 'Gabriel',
       });
 
       observer.complete();
-    }, 1000);
+    }, 3000);
   });
 
   const startDate = Date.now();
 
   patientObservable
     .pipe(
-      concatMap(patient => getPatientPrescriptions(patient.id)),
+      exhaustMap(patient => getPatientPrescriptions()),
     )
     .subscribe(
       val => console.log(`emitted `, val, ` after ${Date.now() - startDate}ms`),
       () => {} ,
-      () => console.log('=== Concat map example completed ==='),
+      () => console.log('=== Exhaust map example completed ==='),
     );
 }
 
-
-export const concatMapExampleCode = `
+export const exhaustMapExampleCode =
+`
 import { Observable } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { exhaustMap } from 'rxjs/operators';
 
 interface Patient {
   id: number;
   name: string;
 }
 
-function getPatientPrescriptions(patientId: number): Observable<any> {
+function getPatientPrescriptions(): Observable<any> {
   return new Observable(observer => {
     setTimeout(() => {
       observer.next(1);
-    }, 3000);
+    }, 1000);
 
     setTimeout(() => {
       observer.next(2);
       observer.complete();
-    }, 4000);
+    }, 2000);
   });
 }
 
-export function concatMapExample() {
+export function exhaustMapExample() {
   const patientObservable = new Observable<Patient>(observer => {
     observer.next({
       id: 1,
@@ -82,22 +89,29 @@ export function concatMapExample() {
     setTimeout(() => {
       observer.next({
         id: 2,
-        name: 'Darlene',
+        name: 'John',
+      });
+    }, 1000);
+
+    setTimeout(() => {
+      observer.next({
+        id: 3,
+        name: 'Gabriel',
       });
 
       observer.complete();
-    }, 1000);
+    }, 3000);
   });
 
   const startDate = Date.now();
 
   patientObservable
     .pipe(
-      concatMap(patient => getPatientPrescriptions(patient.id)),
+      exhaustMap(patient => getPatientPrescriptions()),
     )
     .subscribe(
-      val => console.log(\`emitted \`, val, \` after \${Date.now() - startDate}ms\`),
+      val => console.log(\`emitted; \`, val, \`; after; $;{Date.now() - startDate;}ms\`),
       () => {} ,
-      () => console.log('=== Concat map example completed ==='),
+      () => console.log('=== Exhaust map example completed ==='),
     );
 }`;

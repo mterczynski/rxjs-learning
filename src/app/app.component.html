@@ -1,18 +1,25 @@
-<div>
+<div style="padding: 10px;">
   <h3>
     Examples (open console to see the results)
   </h3>
   <div>
-    <!-- <label>Clear console before every example
-      <input type="checkbox" checked>
-    </label> -->
   </div>
   <div class="examples-buttons">
-    <button (click)="examples.mergeMap()">Merge map</button>
-    <button (click)="examples.switchMap()">Switch map</button>
-    <button (click)="examples.concatMap()">Concat map</button>
-    <button (click)="examples.flatteningArrays()">Flattening arrays</button>
+    <button (click)="runExample(examples.mergeMap)">Merge map</button>
+    <button (click)="runExample(examples.switchMap)">Switch map</button>
+    <button (click)="runExample(examples.concatMap)">Concat map</button>
+    <button (click)="runExample(examples.exhaustMap)">Exhaust map</button>
+    <button (click)="runExample(examples.flatteningArrays)">Flattening arrays</button>
+  </div>
+
+  <h3>
+    Custom operators
+  </h3>
+  <div class="examples-buttons">
+    <button (click)="displayedCode = customOperatorsCode.map">Map</button>
   </div>
 </div>
+
+<pre class="displayed-code"><code [highlight]="displayedCode"></code></pre>
 
 <router-outlet></router-outlet>
